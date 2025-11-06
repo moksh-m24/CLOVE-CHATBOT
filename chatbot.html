@@ -832,7 +832,7 @@
                             type: 'FORM_SUBMISSION_ACK',
                             entity: entity
                         };
-                        document.getElementById('embeddedMessagingFrame').postMessage(ackMessage, '*');
+                        document.getElementById('embeddedMessagingFrame').contentWindow.postMessage(ackMessage, '*');
                     } else {
                         console.log('ESW: utilAPI not ready, queuing message', payload);
                     }
