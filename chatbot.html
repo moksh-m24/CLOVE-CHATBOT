@@ -834,7 +834,7 @@
                         };
                         document.getElementById('embeddedMessagingFrame').contentWindow.postMessage(ackMessage, '*');
                     } else {
-                        console.log('ESW: utilAPI not ready, queuing message', payload);
+                        console.log('ESW: utilAPI not ready, queuing message');
                     }
                 } catch (e) {
                     console.error('ESW send error', e);
@@ -846,7 +846,7 @@
                 try {
                     const data = event.data;
                     if (!data || data.type !== 'SEND_TEXT_MESSAGE') return;
-                    sendToESW(data.payload, data.entity);
+                    sendToESW(data.entity);
                 } catch (err) {
                     console.error('Message handler error', err);
                 }
