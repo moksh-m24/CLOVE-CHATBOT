@@ -573,24 +573,25 @@
         }
     </style>
 
-    <script type='text/javascript'>
-        function initEmbeddedMessaging() {
-            try {
-                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+   <script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+			embeddedservice_bootstrap.init(
+				'00Dbf000004ada1',
+				'Agent_Clove_2',
+				'https://qtfabrics--sep2025.sandbox.my.site.com/ESWNonAuth1762409547172',
+				{
+					scrt2URL: 'https://qtfabrics--sep2025.sandbox.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://qtfabrics--sep2025.sandbox.my.site.com/ESWNonAuth1762409547172/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
-                embeddedservice_bootstrap.init(
-                    '00Dbf000004ada1',
-                    'Agent_Clove_2',
-                    'https://qtfabrics--sep2025.sandbox.my.site.com/ESWNonAuth1762409547172',
-                    {
-                        scrt2URL: 'https://qtfabrics--sep2025.sandbox.my.salesforce-scrt.com'
-                    }
-                );
-            } catch (err) {
-                console.error('Error loading Embedded Messaging: ', err);
-            }
-        };
-    </script>
 
     <script>
         (function () {
@@ -637,10 +638,7 @@
 
         })();
     </script>
-
-    <script type='text/javascript'
-        src='https://qtfabrics--sep2025.sandbox.my.site.com/ESWNonAuth1762409547172/assets/js/bootstrap.min.js'
-        onload='initEmbeddedMessaging()'></script>
+  
 
 </head>
 
