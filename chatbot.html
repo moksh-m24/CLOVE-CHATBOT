@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,9 +51,17 @@
         }
 
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .floating-shapes {
@@ -103,12 +112,16 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0) rotate(0deg);
             }
+
             33% {
                 transform: translateY(-100px) rotate(120deg);
             }
+
             66% {
                 transform: translateY(50px) rotate(240deg);
             }
@@ -132,6 +145,7 @@
                 transform: translateY(-100%);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0);
                 opacity: 1;
@@ -229,6 +243,7 @@
                 transform: translateY(50px);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0);
                 opacity: 1;
@@ -557,7 +572,78 @@
             }
         }
     </style>
+
+    <script type='text/javascript'>
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+                embeddedservice_bootstrap.init(
+                    '00Dbf000004ada1',
+                    'Agent_Clove_2',
+                    'https://qtfabrics--sep2025.sandbox.my.site.com/ESWNonAuth1762409547172',
+                    {
+                        scrt2URL: 'https://qtfabrics--sep2025.sandbox.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        };
+    </script>
+
+    <script>
+        (function () {
+            const messageQueue = [];
+
+            function sendToESW(payload, entity) {
+                try {
+                    if (window.embeddedservice_bootstrap?.utilAPI?.sendTextMessage) {
+                        window.embeddedservice_bootstrap.utilAPI.sendTextMessage(payload);
+                        const ackMessage = {
+                            type: 'FORM_SUBMISSION_ACK',
+                            entity: entity,
+                            payload: { timestamp: new Date().toISOString() }
+                        };
+                        document.getElementById('embeddedMessagingFrame').contentWindow.postMessage(ackMessage, '*');
+                    } else {
+                        console.log('ESW: utilAPI not ready, queuing message', payload);
+                        messageQueue.push(payload);
+                    }
+                } catch (e) {
+                    console.error('ESW send error', e);
+                }
+            }
+
+
+            window.addEventListener('message', function (event) {
+                try {
+                    const data = event.data;
+                    if (!data || data.type !== 'SEND_TEXT_MESSAGE') return;
+                    sendToESW(data.payload, data.entity);
+                } catch (err) {
+                    console.error('Message handler error', err);
+                }
+            });
+
+            const flushInterval = setInterval(() => {
+                if (window.embeddedservice_bootstrap?.utilAPI?.sendTextMessage) {
+                    while (messageQueue.length) {
+                        sendToESW(messageQueue.shift());
+                    }
+                    clearInterval(flushInterval);
+                }
+            }, 500);
+
+        })();
+    </script>
+
+    <script type='text/javascript'
+        src='https://qtfabrics--sep2025.sandbox.my.site.com/ESWNonAuth1762409547172/assets/js/bootstrap.min.js'
+        onload='initEmbeddedMessaging()'></script>
+
 </head>
+
 <body>
     <!-- Background Animation -->
     <div class="background-animation"></div>
@@ -590,7 +676,8 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>Transform Your Business with <span class="highlight">AI Intelligence</span></h1>
-            <p>Unlock the power of artificial intelligence to streamline operations, boost productivity, and drive innovation in your organization.</p>
+            <p>Unlock the power of artificial intelligence to streamline operations, boost productivity, and drive
+                innovation in your organization.</p>
             <div class="hero-buttons">
                 <button class="primary-btn">Start Free Trial</button>
                 <button class="secondary-btn">Watch Demo</button>
@@ -608,7 +695,8 @@
             <div class="feature-card">
                 <div class="feature-icon">🤖</div>
                 <h3>AI Automation</h3>
-                <p>Automate repetitive tasks and free up your team to focus on what matters most with intelligent automation.</p>
+                <p>Automate repetitive tasks and free up your team to focus on what matters most with intelligent
+                    automation.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">📊</div>
@@ -623,7 +711,8 @@
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
                 <h3>Lightning Fast</h3>
-                <p>Experience blazing fast performance with our optimized infrastructure and cutting-edge technology.</p>
+                <p>Experience blazing fast performance with our optimized infrastructure and cutting-edge technology.
+                </p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🌐</div>
@@ -674,7 +763,8 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>🚀 AI Solutions</h3>
-                <p style="color: var(--gray); margin-top: 15px;">Empowering businesses with intelligent automation and AI-driven insights.</p>
+                <p style="color: var(--gray); margin-top: 15px;">Empowering businesses with intelligent automation and
+                    AI-driven insights.</p>
                 <div class="social-links">
                     <a href="#" class="social-icon">𝕏</a>
                     <a href="#" class="social-icon">in</a>
@@ -751,10 +841,10 @@
                         const hasPlus = text.includes('+');
                         const hasPercent = text.includes('%');
                         const hasSlash = text.includes('/');
-                        
+
                         let num = parseFloat(text);
                         if (hasSlash) return; // Skip rating animation
-                        
+
                         let current = 0;
                         const increment = num / 50;
                         const timer = setInterval(() => {
@@ -766,7 +856,7 @@
                                 target.textContent = Math.floor(current) + (hasPlus ? '+' : hasPercent ? '%' : '');
                             }
                         }, 30);
-                        
+
                         observer.unobserve(target);
                     }
                 });
@@ -779,4 +869,5 @@
         window.addEventListener('load', animateStats);
     </script>
 </body>
+
 </html>
