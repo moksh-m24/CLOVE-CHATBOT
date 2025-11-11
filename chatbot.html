@@ -742,11 +742,21 @@
                 embeddedservice_bootstrap.settings.enableUserInputForConversationWithBot = false;
 
                 window.addEventListener("onEmbeddedMessagingBusinessHoursEnded", () => {
-                    window.embeddedservice_bootstrap.utilAPI.showChatButton();
+                    try{
+                        window.embeddedservice_bootstrap.utilAPI.showChatButton();
+                    }
+                    catch(err){
+                        console.error('Error in onEmbeddedMessagingBusinessHoursEnded handler: ', err);
+                    }
                 });
                 
                 window.addEventListener("onEmbeddedMessagingReady", () => {
-                    window.embeddedservice_bootstrap.utilAPI.showChatButton();
+                    try{
+                        window.embeddedservice_bootstrap.utilAPI.showChatButton();
+                    }
+                    catch(err){
+                        console.error('Error in onEmbeddedMessagingBusinessHoursEnded handler: ', err);
+                    }
                 });
                 let tmp = embeddedservice_bootstrap.init(
                     '00Dbf000004ada1',
