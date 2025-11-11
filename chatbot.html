@@ -745,7 +745,7 @@
                     window.addEventListener(eventName, () => {
                         setTimeout(() => {
                             try {
-                                embeddedservice_bootstrap.utilAPI.showChatButton();
+                                embeddedservice_bootstrap?.utilAPI?.showChatButton();
                             } catch (err) {
                                 console.error(`Error in ${eventName} handler:`, err);
                             }
