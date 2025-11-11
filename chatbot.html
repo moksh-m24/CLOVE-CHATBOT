@@ -736,25 +736,23 @@
     </footer>
 
     <script type='text/javascript'>
-        async function initEmbeddedMessaging() {
+        function initEmbeddedMessaging() {
             try {
-                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+                embeddedservice_bootstrap.settings.language = 'en_US';
                 embeddedservice_bootstrap.settings.enableUserInputForConversationWithBot = false;
 
                 ["onEmbeddedMessagingBusinessHoursEnded","onEmbeddedMessagingButtonCreated", "onEmbeddedMessagingWindowClosed"].forEach(eventName => {
                     window.addEventListener(eventName, () => {
-                       // setTimeout(() => {
-                            try {
-                                embeddedservice_bootstrap?.utilAPI?.showChatButton();
-                            } catch (err) {
-                                console.error(`Error in ${eventName} handler:`, err);
-                            }
-                      //  }, 1000);
+                        try {
+                            embeddedservice_bootstrap?.utilAPI?.showChatButton();
+                        } catch (err) {
+                            console.error(`Error in ${eventName} handler:`, err);
+                        }
                     });
                 });
 
                 
-                let tmp  = await embeddedservice_bootstrap.init(
+                embeddedservice_bootstrap.init(
                     '00Dbf000004ada1',
                     'Agent_Clove',
                     'https://qtfabrics--sep2025.sandbox.my.site.com/ESWNonAuth1762409547172',
@@ -762,15 +760,6 @@
                         scrt2URL: 'https://qtfabrics--sep2025.sandbox.my.salesforce-scrt.com'
                     }
                 )
-
-                //setTimeout(() => {
-                    //try{
-                    //    embeddedservice_bootstrap?.utilAPI?.showChatButton()
-                    //}
-                   // catch(err){
-                    //    console.error('Error in onEmbeddedMessagingBusinessHoursEnded handler: ', err);
-                  //  }
-                //}, 1000);
                 
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
