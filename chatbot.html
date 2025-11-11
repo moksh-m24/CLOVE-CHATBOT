@@ -741,13 +741,15 @@
                 embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
                 embeddedservice_bootstrap.settings.enableUserInputForConversationWithBot = false;
 
-                ["onEmbeddedMessagingBusinessHoursEnded", "onEmbeddedMessagingWindowClosed"].forEach(eventName => {
+                ["onEmbeddedMessagingBusinessHoursEnded","onEmbeddedMessagingButtonCreated", "onEmbeddedMessagingWindowClosed"].forEach(eventName => {
                     window.addEventListener(eventName, () => {
-                        try {
-                            embeddedservice_bootstrap?.utilAPI?.showChatButton();
-                        } catch (err) {
-                            console.error(`Error in ${eventName} handler:`, err);
-                        }
+                        setTimeout(() => {
+                            try {
+                                embeddedservice_bootstrap?.utilAPI?.showChatButton();
+                            } catch (err) {
+                                console.error(`Error in ${eventName} handler:`, err);
+                            }
+                        }, 1000);
                     });
                 });
 
@@ -761,14 +763,14 @@
                     }
                 )
 
-                setTimeout(() => {
-                    try{
-                        embeddedservice_bootstrap?.utilAPI?.showChatButton()
-                    }
-                    catch(err){
-                        console.error('Error in onEmbeddedMessagingBusinessHoursEnded handler: ', err);
-                    }
-                }, 1000);
+                //setTimeout(() => {
+                    //try{
+                    //    embeddedservice_bootstrap?.utilAPI?.showChatButton()
+                    //}
+                   // catch(err){
+                    //    console.error('Error in onEmbeddedMessagingBusinessHoursEnded handler: ', err);
+                  //  }
+                //}, 1000);
                 
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
