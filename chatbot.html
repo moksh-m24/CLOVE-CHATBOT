@@ -747,7 +747,9 @@
                     {
                         scrt2URL: 'https://qtfabrics--sep2025.sandbox.my.salesforce-scrt.com'
                     }
-                );
+                ).then(res=>{
+                     window.embeddedservice_bootstrap.utilAPI.showChatButton();
+                })
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
             }
@@ -756,7 +758,7 @@
     <script type='text/javascript'
         src='https://qtfabrics--sep2025.sandbox.my.site.com/ESWNonAuth1762409547172/assets/js/bootstrap.min.js'
         onload='initEmbeddedMessaging()'>
-            embeddedservice_bootstrap.utilAPI.showChatButton();
+            
         </script>
     <script>
         // Smooth scroll for navigation
