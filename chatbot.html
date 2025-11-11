@@ -743,13 +743,13 @@
 
                 ["onEmbeddedMessagingBusinessHoursEnded","onEmbeddedMessagingButtonCreated", "onEmbeddedMessagingWindowClosed"].forEach(eventName => {
                     window.addEventListener(eventName, () => {
-                        setTimeout(() => {
+                       // setTimeout(() => {
                             try {
                                 embeddedservice_bootstrap?.utilAPI?.showChatButton();
                             } catch (err) {
                                 console.error(`Error in ${eventName} handler:`, err);
                             }
-                        }, 1000);
+                      //  }, 1000);
                     });
                 });
 
