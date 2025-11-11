@@ -736,7 +736,7 @@
     </footer>
 
     <script type='text/javascript'>
-        function initEmbeddedMessaging() {
+        async function initEmbeddedMessaging() {
             try {
                 embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
                 embeddedservice_bootstrap.settings.enableUserInputForConversationWithBot = false;
@@ -744,14 +744,14 @@
                 window.addEventListener("onEmbeddedMessagingBusinessHoursEnded", () => {
                     setTimeout(() => {
                         try{
-                            window.embeddedservice_bootstrap.utilAPI.showChatButton();
+                            embeddedservice_bootstrap.utilAPI.showChatButton()
                         }
                         catch(err){
                             console.error('Error in onEmbeddedMessagingBusinessHoursEnded handler: ', err);
                         }
                     }, 1000);
                 });
-                let tmp = embeddedservice_bootstrap.init(
+                let tmp  = await embeddedservice_bootstrap.init(
                     '00Dbf000004ada1',
                     'Agent_Clove',
                     'https://qtfabrics--sep2025.sandbox.my.site.com/ESWNonAuth1762409547172',
@@ -760,7 +760,15 @@
                     }
                 )
 
-                
+                setTimeout(() => {
+                    try{
+                        embeddedservice_bootstrap?.utilAPI?.showChatButton()
+                        embeddedservice_bootstrap?.utilAPI?.showChatButton()
+                    }
+                    catch(err){
+                        console.error('Error in onEmbeddedMessagingBusinessHoursEnded handler: ', err);
+                    }
+                }, 1000);
                 
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
@@ -855,8 +863,7 @@
                     console.error('ESW send error', e);
                 }
             }
-
-
+            
             window.addEventListener('message', function (event) {
                 try {
                     const data = event.data;
