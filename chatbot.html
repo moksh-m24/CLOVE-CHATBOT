@@ -839,12 +839,13 @@
         (function () {
             const messageQueue = [];
 
-            function sendToESW(entity) {
+            function sendToESW(entity,timestamp) {
                 try {
                     if (window.embeddedservice_bootstrap?.utilAPI?.sendTextMessage) {
                         const ackMessage = {
                             type: 'FORM_SUBMISSION_ACK',
-                            entity: entity
+                            entity: entity,
+                            timestamp:timestamp
                         };
                         document.getElementById('embeddedMessagingFrame').contentWindow.postMessage(ackMessage, '*');
                     } else {
@@ -859,7 +860,7 @@
                 try {
                     const data = event.data;
                     if (!data || data.type !== 'SEND_TEXT_MESSAGE') return;
-                    sendToESW(data.entity);
+                    sendToESW(data.entity,data.timestamp);
                 } catch (err) {
                     console.error('Message handler error', err);
                 }
