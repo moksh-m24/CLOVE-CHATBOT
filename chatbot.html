@@ -742,9 +742,12 @@
                 embeddedservice_bootstrap.settings.enableUserInputForConversationWithBot = false;
 
                 window.addEventListener("onEmbeddedMessagingBusinessHoursEnded", () => {
-                    window?.embeddedservice_bootstrap?.utilAPI?.showChatButton();
+                    window.embeddedservice_bootstrap.utilAPI.showChatButton();
                 });
-
+                
+                window.addEventListener("onEmbeddedMessagingReady", () => {
+                    window.embeddedservice_bootstrap.utilAPI.showChatButton();
+                });
                 let tmp = embeddedservice_bootstrap.init(
                     '00Dbf000004ada1',
                     'Agent_Clove',
