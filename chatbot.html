@@ -751,6 +751,7 @@
                         }
                     }, 1000);
                 });
+
                 let tmp  = await embeddedservice_bootstrap.init(
                     '00Dbf000004ada1',
                     'Agent_Clove',
@@ -760,15 +761,7 @@
                     }
                 )
 
-                setTimeout(() => {
-                    try{
-                        embeddedservice_bootstrap?.utilAPI?.showChatButton()
-                        embeddedservice_bootstrap?.utilAPI?.showChatButton()
-                    }
-                    catch(err){
-                        console.error('Error in onEmbeddedMessagingBusinessHoursEnded handler: ', err);
-                    }
-                }, 1000);
+                embeddedservice_bootstrap?.utilAPI?.showChatButton()
                 
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
