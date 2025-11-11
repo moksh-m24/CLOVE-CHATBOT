@@ -747,9 +747,10 @@
                     {
                         scrt2URL: 'https://qtfabrics--sep2025.sandbox.my.salesforce-scrt.com'
                     }
-                ).then(res=>{
-                     window.embeddedservice_bootstrap.utilAPI.showChatButton();
-                })
+                )
+                 
+                window.embeddedservice_bootstrap.utilAPI.showChatButton();
+                
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
             }
