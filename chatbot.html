@@ -740,6 +740,11 @@
             try {
                 embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
                 embeddedservice_bootstrap.settings.enableUserInputForConversationWithBot = false;
+
+                window.addEventListener("onEmbeddedMessagingReady", () => {
+                    window?.embeddedservice_bootstrap?.utilAPI?.showChatButton();
+                });
+
                 let tmp = embeddedservice_bootstrap.init(
                     '00Dbf000004ada1',
                     'Agent_Clove',
@@ -759,7 +764,7 @@
     <script type='text/javascript'
         src='https://qtfabrics--sep2025.sandbox.my.site.com/ESWNonAuth1762409547172/assets/js/bootstrap.min.js'
         onload='initEmbeddedMessaging()'>
-            window?.embeddedservice_bootstrap?.utilAPI?.showChatButton();
+            
         </script>
     <script>
         // Smooth scroll for navigation
