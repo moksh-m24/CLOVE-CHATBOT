@@ -741,16 +741,18 @@
                 embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
                 embeddedservice_bootstrap.settings.enableUserInputForConversationWithBot = false;
 
-                window.addEventListener("onEmbeddedMessagingBusinessHoursEnded", () => {
-                    setTimeout(() => {
-                        try{
-                            embeddedservice_bootstrap.utilAPI.showChatButton()
-                        }
-                        catch(err){
-                            console.error('Error in onEmbeddedMessagingBusinessHoursEnded handler: ', err);
-                        }
-                    }, 1000);
+                ["onEmbeddedMessagingBusinessHoursEnded", "onEmbeddedMessagingWindowClosed"].forEach(eventName => {
+                    window.addEventListener(eventName, () => {
+                        setTimeout(() => {
+                            try {
+                                embeddedservice_bootstrap.utilAPI.showChatButton();
+                            } catch (err) {
+                                console.error(`Error in ${eventName} handler:`, err);
+                            }
+                        }, 1000);
+                    });
                 });
+
                 
                 let tmp  = await embeddedservice_bootstrap.init(
                     '00Dbf000004ada1',
